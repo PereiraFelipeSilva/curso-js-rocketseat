@@ -17,13 +17,14 @@ function addNome(nome) {
 }
 
 button.addEventListener('click', ()=>{
+   lista.innerHTML = '';
    addNome();
    for(nome of nomes){
       let li = document.createElement('li');
       li.innerHTML = nome;
-      lista.appendChild(li); 
+      lista.appendChild(li);
    };
-   nomes = [];
    input.value = '';
    input.focus();
+   console.log(nomes);
 });
