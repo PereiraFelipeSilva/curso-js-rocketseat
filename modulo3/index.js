@@ -3,22 +3,20 @@
 const button = document.querySelector('.app button');
 let lista = document.querySelector('.lista');
 let input = document.querySelector('#input');
-let tarefas = [
-   'Fazer um café',
-   'Estudar JavaScript',
-   'Almoçar'
-];
+let tarefas = JSON.parse(localStorage.getItem('Lista de tarefas')) || [];
 
 function addTarefa(tarefa){
    tarefa = input.value;
    tarefas.push(tarefa);
    input.value = '';
    exibeTarefas();
+   saveToStorage();
 };
 
 function excluirTarefa(position){
    tarefas.splice(position, 1);
    exibeTarefas();
+   saveToStorage();
 };
 
 function exibeTarefas(){
@@ -38,6 +36,10 @@ function exibeTarefas(){
    };
    input.focus();
    console.log(tarefas)
+};
+
+function saveToStorage(){
+   localStorage.setItem('Lista de tarefas', JSON.stringify(tarefas));
 };
 
 button.onclick = addTarefa;
