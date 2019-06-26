@@ -16,3 +16,39 @@ Depois de preencher o input e adicionar, a seguinte lista deve aparecer abaixo:
  <li>repo4</li>
  <li>repo5</li>
 </ul> */
+
+const input = document.querySelector('#input');
+const button = document.querySelector('#button');
+let repositoriesList = document.querySelector('.repositoriesList');
+
+function showRepositories(repositories){
+   for(repo of repositories){
+      let li = document.createElement('li');
+      li.innerHTML = repo.name;
+      repositoriesList.appendChild(li);
+   }
+}
+
+function searchRepositories(){
+   repositoriesList.innerHTML = '';
+   let user = input.value;
+
+   if(!user) return;
+
+   axios.get(`https://api.github.com/users/${user}/repos`)
+      .then(function(response){
+         showRepositories(response.data);
+         input.value = '';
+         input.focus();
+      })
+      .catch(function(){
+         let errorMessage = document.createElement('li');
+         errorMessage.innerHTML = '<strong>Usuário não encontrado!</strong> Por favor, tente novamente';
+         errorMessage.style.color = '#f00';
+         repositoriesList.appendChild(errorMessage);
+         input.value = '';
+         input.focus();
+      })
+};
+
+button.onclick = searchRepositories;
