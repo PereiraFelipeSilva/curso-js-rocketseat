@@ -22,15 +22,26 @@ const button = document.querySelector('#button');
 let repositoriesList = document.querySelector('.repositoriesList');
 
 function showRepositories(repositories){
+   repositoriesList.innerHTML = '';
    for(repo of repositories){
       let li = document.createElement('li');
       li.innerHTML = repo.name;
       repositoriesList.appendChild(li);
    }
+};
+
+function showLoadingMessage(){
+   repositoriesList.innerHTML = '';
+
+   let loadingMessage = document.createElement('li');
+   loadingMessage.innerHTML = 'carregando...';
+   repositoriesList.appendChild(loadingMessage);
 }
 
 function searchRepositories(){
    repositoriesList.innerHTML = '';
+
+   showLoadingMessage();
    
    let user = input.value;
    if(!user) return;
