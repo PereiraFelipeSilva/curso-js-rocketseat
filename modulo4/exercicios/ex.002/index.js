@@ -10,13 +10,13 @@ Basta alterar "diego3g" pelo nome do usuário.
 Depois de preencher o input e adicionar, a seguinte lista deve aparecer abaixo:
 
 <ul>
- <li>repo1</li>
- <li>repo2</li>
- <li>repo3</li>
- <li>repo4</li>
- <li>repo5</li>
+<li>repo1</li>
+<li>repo2</li>
+<li>repo3</li>
+<li>repo4</li>
+<li>repo5</li>
 </ul> */
-
+   
 const input = document.querySelector('#input');
 const button = document.querySelector('#button');
 let repositoriesList = document.querySelector('.repositoriesList');
@@ -31,8 +31,8 @@ function showRepositories(repositories){
 
 function searchRepositories(){
    repositoriesList.innerHTML = '';
+   
    let user = input.value;
-
    if(!user) return;
 
    axios.get(`https://api.github.com/users/${user}/repos`)
@@ -40,6 +40,11 @@ function searchRepositories(){
          showRepositories(response.data);
          input.value = '';
          input.focus();
+         let img = document.createElement('img');
+         img.setAttribute('src', response.data[0].owner.avatar_url);
+         img.style.width = '150px';
+         img.style.height = '150px';
+         repositoriesList.appendChild(img);
       })
       .catch(function(){
          let errorMessage = document.createElement('li');
