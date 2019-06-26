@@ -3,10 +3,14 @@ segundos retornará se usuário é maior ou não que 18 anos. Se o usuário ter 
 idade o resultado deve cair no .then, caso contrário, no .catch */
 
 function checaIdade(idade) {
-   // Retornar uma promise
-}
+   return new Promise(function(resolve, reject){
+      setTimeout(function(){
+         return idade >= 18 ? resolve() : reject()
+      }, 2000);
+   });
+};
 
-checaIdade(20)
+checaIdade(17)
    .then(function() {
    console.log("Maior que 18");
    })
