@@ -43,3 +43,5 @@ function saveToStorage(){
 };
 
 button.onclick = addTarefa;
+
+window.onload = exibeTarefas;
